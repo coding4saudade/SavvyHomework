@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/Amanzi/code/SavvyCoders/SavvyHomework/sql/CMSpdp_student.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="7911"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,23:mainplan information sample"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">select
+	p.id
+--Coverage type for beneficiary with no subsidy
+--0=pre-deductible
+--1=initial coverage
+--2=coverage gap
+--3=catastrophic
+	,case b.COVERAGE_LEVEL when '0' then 'pre-deductible'
+		when '1' then 'initial coverage'
+			when '2' then 'coverage gap'
+			when '3' then 'catastrophic'
+			else 'Not mapped'
+			end as COVERAGE_LEVEL
+			
+	,tier
+--Length of days supply to which cost structure applies
+--1=30 days
+--2=90 days
+--3=other
+--4=60 days
+	,case DAYS_SUPPLY when '1' then 30
+		when '2' then 90
+		when '3' then -1 --this is other - can't calculate
+		when '4' then  60
+		else -2 --unmapped error
+		end as DAYS_SUPPLY
+--Type of cost sharing at preferred pharmacies
+--0=not offered
+--1=copay
+--2=coinsurance
+	,CASE COST_TYPE_PREF when '0' then 'not offered'
+		WHEN '1' then 'copay'
+		WHEN '2' then 'coinsurance'
+		else 'not mapped:' || COST_TYPE_PREF 
+		end as COST_TYPE_MAIL_PREF
+	,b.*
+	from [beneficiary cost file sample] b
+		inner join PlanInformation p
+			on b.CONTRACT_ID = p.contractId
+			and b.PLAN_ID = p.planId
+			and b.SEGMENT_ID = p.segmentId;</sql><current_tab id="0"/></tab_sql></sqlb_project>
