@@ -1,0 +1,23 @@
+{
+    "good_id": 28,
+    "item_name": "One bedroom apartment outside of city centre",
+    "category_id": 5,
+    "category_name": "Rent Per Month",
+    "min": 1200,
+    "avg": 1467.5,
+    "max": 1735,
+    "usd": {"min": "1200.00", "avg": "1467.50", "max": "1735.00"},
+    "measure": "money",
+    "currency_code": "USD",
+}, {
+    "good_id": 29,
+    "item_name": "One bedroom apartment in city centre",
+    "category_id": 5,
+    "category_name": "Rent Per Month",
+    "min": 1500,
+    "avg": 1735,
+    "max": 2100,
+    "usd": {"min": "1500.00", "avg": "1735.00", "max": "2100.00"},
+    "measure": "money",
+    "currency_code": "USD",
+}
